@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using Domain.ValueObjects;
+
+namespace Domain.Entities
 {
     public class Room
     {
@@ -18,5 +20,6 @@
             }
         }
         public bool HasGuest { get { return true; } }
+        public Price Price { get; set; }
     }
 }
