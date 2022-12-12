@@ -1,4 +1,4 @@
-﻿namespace Domain.Enums
+﻿namespace Domain.Guests.Enums
 {
     public enum DocumentType
     {

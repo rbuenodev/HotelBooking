@@ -1,4 +1,4 @@
-﻿using Domain.Ports;
+﻿using Domain.Guests.Ports;
 using Microsoft.EntityFrameworkCore;
 using Entities = Domain.Entities;
 

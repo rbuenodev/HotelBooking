@@ -1,6 +1,6 @@
-﻿using Domain.Enums;
+﻿using Domain.Guests.Enums;
 
-namespace Domain.ValueObjects
+namespace Domain.Guests.ValueObjects
 {
     public class PersonId
     {

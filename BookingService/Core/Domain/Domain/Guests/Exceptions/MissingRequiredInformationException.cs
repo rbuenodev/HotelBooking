@@ -1,4 +1,4 @@
-﻿namespace Domain.Exceptions
+﻿namespace Domain.Guests.Exceptions
 {
     public class MissingRequiredInformationException : Exception
     {

@@ -1,6 +1,6 @@
-﻿using Domain.Enums;
+﻿using Domain.Rooms.Enums;
 
-namespace Domain.ValueObjects
+namespace Domain.Rooms.ValueObjects
 {
     public class Price
     {

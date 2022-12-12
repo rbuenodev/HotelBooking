@@ -1,11 +1,12 @@
-using Application;
-using Application.Enum;
 using Application.Guest.DTOs;
 using Application.Guest.Requests;
-using Application.Guest.Responses;
 using Domain.Entities;
-using Domain.Ports;
+using Domain.Guests.Ports;
 using Moq;
+using Application.Enum;
+using Domain.Guests.ValueObjects;
+using Domain.Guests.Enums;
+using Application.Guest;
 
 namespace ApplicationTests
 {
@@ -95,7 +96,7 @@ namespace ApplicationTests
         public async Task ShouldGetAGuest()
         {
             var expectedId = 222;
-            var guest = new Guest { Name = "Name", LastName = "LastName", DocumentId = new Domain.ValueObjects.PersonId { DocumentType = Domain.Enums.DocumentType.Passport, IdNumber = "1234" }, Email = "email@email.com", Id = expectedId };            
+            var guest = new Guest { Name = "Name", LastName = "LastName", DocumentId = new PersonId { DocumentType = DocumentType.Passport, IdNumber = "1234" }, Email = "email@email.com", Id = expectedId };            
             var fakeRepo = new Mock<IGuestRepository>();
             fakeRepo.Setup(x => x.Get(expectedId)).Returns(Task.FromResult<Guest?>(guest));
 

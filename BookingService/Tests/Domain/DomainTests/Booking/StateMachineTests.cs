@@ -1,6 +1,7 @@
+using Domain.Bookings.Enums;
 using Domain.Entities;
-using Domain.Enums;
-using Action = Domain.Enums.Action;
+
+using Action = Domain.Bookings.Enums.Action;
 
 namespace DomainTests.Bookings
 {
@@ -30,7 +31,7 @@ namespace DomainTests.Bookings
         public void ShouldSetStatusToCanceledWhenCancelingABookingWithCreatedStatus()
         {
             var booking = new Booking();
-            booking.ChangeState(Domain.Enums.Action.Cancel);
+            booking.ChangeState(Action.Cancel);
             Assert.That(booking.CurrentStatus, Is.EqualTo(Status.Canceled));
         }
 

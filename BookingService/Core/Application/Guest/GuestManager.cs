@@ -3,10 +3,10 @@ using Application.Guest.DTOs;
 using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Application.Guest.Responses;
-using Domain.Exceptions;
-using Domain.Ports;
+using Domain.Guests.Exceptions;
+using Domain.Guests.Ports;
 
-namespace Application
+namespace Application.Guest
 {
     public class GuestManager : IGuestManager
     {
