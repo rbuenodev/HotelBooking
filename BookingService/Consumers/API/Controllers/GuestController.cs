@@ -24,12 +24,32 @@ namespace API.Controllers
             var request = new CreateGuestRequest { Data = guestDTO };
             var res = await _ports.CreateGuest(request);
             if (res.Success) return Created("", res.Data);
-            if (res.ErrorCode == ErrorCodes.NOT_FOUND)
+            switch (res.ErrorCode)
             {
-                return BadRequest(res);
+                case ErrorCodes.NOT_FOUND:
+                    return BadRequest(res);
+                case ErrorCodes.COULD_NOT_STORE_DATA:
+                    return BadRequest(res);
+                case ErrorCodes.INVALID_PERSON_ID:
+                    return BadRequest(res);
+                case ErrorCodes.MISSING_REQUIRED_INFORMATION:
+                    return BadRequest(res);
+                case ErrorCodes.INVALID_EMAIL:
+                    return BadRequest(res);
+                default:
+                    break;
             }
             _logger.LogError("Response with unknown Error code Returned", res);
             return BadRequest(500);
+        }
+
+        [HttpGet("{guestId}")]
+        public async Task<ActionResult<GuestDTO>> Get(int guestId)
+        {
+            var res = await _ports.GetGest(guestId);
+            if (res.Success) return Created("", res.Data);
+
+            return NotFound(res);
         }
     }
 }

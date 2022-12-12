@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "BookingService\Adap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "BookingService\Core\Application\Application.csproj", "{E4586FBE-6CF8-46C1-8469-CF34972B13A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "BookingService\Core\Domain\Domain\Domain.csproj", "{D397151A-A6CF-4761-813C-949543D0BA19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "BookingService\Core\Domain\Domain\Domain.csproj", "{D397151A-A6CF-4761-813C-949543D0BA19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C309A68-AFFA-4991-AD01-C520F4495CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
