@@ -33,8 +33,7 @@ namespace Application.Guest
             catch (InvalidPersonDocumentException)
             {
                 return new GuestResponse
-                {
-                    //TODO correct error code
+                {                    
                     Success = false,
                     ErrorCode = ErrorCodes.INVALID_PERSON_ID,
                     Message = "The given ID is not valid"
@@ -43,8 +42,7 @@ namespace Application.Guest
             catch (MissingRequiredInformationException)
             {
                 return new GuestResponse
-                {
-                    //TODO correct error code
+                {                 
                     Success = false,
                     ErrorCode = ErrorCodes.MISSING_REQUIRED_INFORMATION,
                     Message = "Missing required information"
@@ -53,8 +51,7 @@ namespace Application.Guest
             catch (InvalidEmailException)
             {
                 return new GuestResponse
-                {
-                    //TODO correct error code
+                {                 
                     Success = false,
                     ErrorCode = ErrorCodes.INVALID_EMAIL,
                     Message = "The given Email is not valid"
@@ -63,8 +60,7 @@ namespace Application.Guest
             catch (Exception e)
             {
                 return new GuestResponse
-                {
-                    //TODO correct error code
+                {                    
                     Success = false,
                     ErrorCode = ErrorCodes.COULD_NOT_STORE_DATA,
                     Message = $"There was an error while saving {e.Message}"

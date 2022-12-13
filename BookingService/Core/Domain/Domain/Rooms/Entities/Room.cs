@@ -36,7 +36,7 @@ namespace Domain.Entities
 
                 return this.Bookings.Where(
                     b => b.Room.Id == this.Id &&
-                    notAvailableStatuses.Contains(b.CurrentStatus)).Count() > 0;
+                    notAvailableStatuses.Contains(b.Status)).Count() > 0;
             }
         }
 
@@ -55,19 +55,12 @@ namespace Domain.Entities
 
         public bool CanBeBooked()
         {
-            try
-            {
-                this.ValidateState();
-            }
-            catch (Exception)
-            {
 
-                return false;
-            }
+            this.ValidateState();
 
             if (!this.IsAvailable)
             {
-                return false;
+                throw new RoomCantBeBookedException();
             }
 
             return true;

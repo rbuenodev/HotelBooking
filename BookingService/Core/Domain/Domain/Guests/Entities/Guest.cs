@@ -45,5 +45,11 @@ namespace Domain.Entities
 
         }
 
+        public bool IsValid()
+        {
+            this.ValidateState();
+            return true;
+        }
+
     }
 }
