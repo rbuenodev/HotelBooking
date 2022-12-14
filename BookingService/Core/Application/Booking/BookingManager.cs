@@ -2,6 +2,8 @@
 using Application.Booking.Ports;
 using Application.Booking.Request;
 using Application.Booking.Response;
+using Application.Payment.Ports;
+using Application.Payment.Responses;
 using Domain.Bookings.Exceptions;
 using Domain.Bookings.Ports;
 using Domain.Guests.Ports;
@@ -15,11 +17,13 @@ namespace Application.Booking
         private readonly IBookingRepository _bookingRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly IGuestRepository _guestRepository;
-        public BookingManager(IBookingRepository bookingRepository, IRoomRepository roomRepository, IGuestRepository guestRepository)
+        private readonly IPaymentProcessorFactory _paymentProcessorFactory;
+        public BookingManager(IBookingRepository bookingRepository, IRoomRepository roomRepository, IGuestRepository guestRepository, IPaymentProcessorFactory paymentProcessorFactory)
         {
             _bookingRepository = bookingRepository;
             _roomRepository = roomRepository;
             _guestRepository = guestRepository;
+            _paymentProcessorFactory = paymentProcessorFactory;
         }
         public async Task<BookingResponse> CreatBooking(CreateBookingRequest bookingRequest)
         {
@@ -87,6 +91,25 @@ namespace Application.Booking
         public Task<BookingResponse> GetBooking(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<PaymentResponse> PayForABooking(PaymentRequest paymentRequestDto)
+        {
+            var paymentProcessor = _paymentProcessorFactory.GetPaymentProcessor(paymentRequestDto.SelectedPaymentProvider);
+
+            var response = await paymentProcessor.CapturePayment(paymentRequestDto.PaymentIntention);
+
+            if (response.Success)
+            {
+                return new PaymentResponse
+                {
+                    Success = true,
+                    Data = response.Data,
+                    Message = "Payment successfully processed"
+                };
+            }
+
+            return response;
         }
     }
 }

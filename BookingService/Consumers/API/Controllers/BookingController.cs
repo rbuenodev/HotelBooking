@@ -2,6 +2,7 @@
 using Application.Booking.Ports;
 using Application.Booking.Request;
 using Application.Enum;
+using Application.Payment.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -47,7 +48,34 @@ namespace API.Controllers
 
             _logger.LogError("Response with unkown error", res);
             return BadRequest(500);
-
         }
+
+        [HttpPost]
+        [Route("{bookingId}/Pay")]
+        public async Task<ActionResult<PaymentResponse>> Pay(PaymentRequest paymentRequestDto, int bookingId)
+        {
+            paymentRequestDto.BookingId = bookingId;
+            var res = await _bookingManager.PayForABooking(paymentRequestDto);
+
+            if (res.Success) return Ok(res.Data);
+
+            return BadRequest(res);
+        }
+
+        /* [HttpGet]
+         public async Task<ActionResult<BookingDTO>> Get(int id)
+         {
+             var query = new GetBookingQuery
+             {
+                 Id = id
+             };
+
+             var res = await _mediator.Send(query);
+
+             if (res.Success) return Created("", res.Data);
+
+             _logger.LogError("Could not process the request", res);
+             return BadRequest(res);
+         }*/
     }
 }

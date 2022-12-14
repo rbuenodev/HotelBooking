@@ -1,6 +1,6 @@
 ﻿namespace Domain.Bookings.Exceptions
 {
-    public class RequiredRoomIsNullExeption:Exception
+    public class RequiredRoomIsNullExeption : Exception
     {
     }
 }
