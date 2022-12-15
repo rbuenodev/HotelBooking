@@ -23,5 +23,13 @@ namespace Data.Booking
         {
             return _hotelDbContext.Bookings.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
+
+        public Task<Entities.Booking> GetAggregate(int Id)
+        {
+            return _hotelDbContext.Bookings
+                .Include(r => r.Room)
+                .Include(g => g.Guest)
+                .Where(x => x.Id == Id).FirstAsync();
+        }
     }
 }

@@ -88,7 +88,7 @@ namespace Application.Booking
             }
         }
 
-        public Task<BookingResponse> GetBooking(int id)
+        public async Task<BookingResponse> GetBooking(int id)
         {
             throw new NotImplementedException();
         }

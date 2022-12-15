@@ -12,6 +12,7 @@ using Data.Room;
 using Domain.Bookings.Ports;
 using Domain.Guests.Ports;
 using Domain.Rooms.Ports;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Payment.Application;
 using System.Text.Json.Serialization;
@@ -21,11 +22,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddMediatR(typeof(BookingManager));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-
 
 builder.Services.AddScoped<IGuestManager, GuestManager>();
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();

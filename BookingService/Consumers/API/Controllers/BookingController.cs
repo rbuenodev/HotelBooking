@@ -1,8 +1,11 @@
-﻿using Application.Booking.DTOs;
+﻿using Application.Booking.Commands;
+using Application.Booking.DTOs;
 using Application.Booking.Ports;
+using Application.Booking.Queries;
 using Application.Booking.Request;
 using Application.Enum;
 using Application.Payment.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -13,17 +16,24 @@ namespace API.Controllers
     {
         private readonly IBookingManager _bookingManager;
         private readonly ILogger<BookingController> _logger;
-        public BookingController(IBookingManager bookingManager, ILogger<BookingController> logger)
+        private readonly IMediator _mediator;
+        public BookingController(IBookingManager bookingManager, ILogger<BookingController> logger, IMediator mediator)
         {
 
             _bookingManager = bookingManager;
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpPost]
         public async Task<ActionResult<BookingDTO>> Post(BookingDTO bookingDto)
         {
-            var res = await _bookingManager.CreatBooking(new CreateBookingRequest { BookingDto = bookingDto });
+
+            var command = new CreateBookingCommand
+            {
+                CreateBookingRequest = new CreateBookingRequest { BookingDto = bookingDto }
+            };
+            var res = await _mediator.Send(command);
 
             if (res.Success) return Created("", res.Data);
             switch (res.ErrorCode)
@@ -62,20 +72,20 @@ namespace API.Controllers
             return BadRequest(res);
         }
 
-        /* [HttpGet]
-         public async Task<ActionResult<BookingDTO>> Get(int id)
-         {
-             var query = new GetBookingQuery
-             {
-                 Id = id
-             };
+        [HttpGet]
+        public async Task<ActionResult<BookingDTO>> Get(int id)
+        {
+            var query = new GetBookingQuery
+            {
+                Id = id
+            };
 
-             var res = await _mediator.Send(query);
+            var res = await _mediator.Send(query);
 
-             if (res.Success) return Created("", res.Data);
+            if (res.Success) return Created("", res.Data);
 
-             _logger.LogError("Could not process the request", res);
-             return BadRequest(res);
-         }*/
+            _logger.LogError("Could not process the request", res);
+            return BadRequest(res);
+        }
     }
 }
