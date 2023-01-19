@@ -15,7 +15,8 @@ namespace DomainTests.Bookings
         [Test]
         public void ShouldAlwaysStartWithCreatedStatus()
         {
-            var booking = new Booking();
+            //var booking = new Booking();
+            Booking booking = null;
             Assert.That(booking.Status, Is.EqualTo(Status.Created));
         }
 

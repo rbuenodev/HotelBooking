@@ -365,3 +365,5 @@ FodyWeavers.xsd
 
 #DB
 .dbdata
+/coveragereport
+/coverage_report
