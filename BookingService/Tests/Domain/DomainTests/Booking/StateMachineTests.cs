@@ -18,6 +18,7 @@ namespace DomainTests.Bookings
             //var booking = new Booking();
             Booking booking = null;
             Assert.That(booking.Status, Is.EqualTo(Status.Created));
+
         }
 
         [Test]
